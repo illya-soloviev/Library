@@ -4,5 +4,11 @@ $('.active').addClass('hello', 'world').setAttribute('attr01', '123').
 setAttribute('attr02', 'asdsaz').removeAttribute('attr01');
 
 $('button').click(function() {
-    $(this).toggleClass('active');
+    $(this).html('fafaf');
 });
+
+$('div').click(function() {
+    console.log($(this).index());
+});
+
+console.log($('div').find('.more'));

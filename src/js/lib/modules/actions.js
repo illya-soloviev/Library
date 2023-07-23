@@ -42,7 +42,7 @@ $.prototype.find = function(selector) {
 
     const objCopy = Object.assign({}, this);
 
-    for(let i = 0; i < this.length; i++) {
+    for(let i = 0; i < objCopy.length; i++) {
         const arr = objCopy[i].querySelectorAll(selector);
         if (arr.length == 0) {
             continue;
@@ -54,6 +54,53 @@ $.prototype.find = function(selector) {
         }
 
         numberOfItems += arr.length;
+    }
+
+    this.length = numberOfItems;
+
+    const objLength = Object.keys(this).length;
+    for(; numberOfItems < objLength; numberOfItems++) {
+        delete this[numberOfItems];
+    }
+
+    return this;
+}
+
+$.prototype.closest = function(selector) {
+    let counter = 0;
+
+    for(let i = 0; i < this.length; i++) {
+        this[i] = this[i].closest(selector);
+        counter++;
+    }
+
+    const objLength = Object.keys(this).length;
+    for(; counter < objLength; counter++) {
+        delete this[counter];
+    }
+
+    return this;
+}
+
+$.prototype.siblings = function() {
+    let numberOfItems = 0;
+    let counter = 0;
+
+    const objCopy = Object.assign({}, this);
+
+    for(let i = 0; i < objCopy.length; i++) {
+        const arr = objCopy[i].parentNode.children;
+
+        for(let j = 0; j < arr.length; j++) {
+            if (objCopy[i] === arr[j]) {
+                continue;
+            }
+
+            this[counter] = arr[j];
+            counter++;
+        }
+
+        numberOfItems += arr.length - 1;
     }
 
     this.length = numberOfItems;

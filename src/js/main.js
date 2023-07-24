@@ -1,15 +1,13 @@
 import $ from './lib/lib';
 
-$('.active').addClass('hello', 'world').setAttribute('attr01', '123').
-setAttribute('attr02', 'asdsaz').removeAttribute('attr01');
-
-$('button').click(function() {
-    $(this).html('fafaf');
+$('#first').on('click', () => {
+    $('div').eq(1).fadeOut(800);
 });
 
-$('div').click(function() {
-    console.log($(this).index());
+$('[data-count="second"]').on('click', () => {
+    $('div').eq(2).fadeOut(800);
 });
 
-// console.log($('.some').eq(0).siblings());
-$('button').fadeIn(1800);
+$('button').eq(2).on('click', () => {
+    $('.w-500').fadeOut(800);
+});

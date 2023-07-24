@@ -316,6 +316,38 @@ _core__WEBPACK_IMPORTED_MODULE_0__["default"].prototype.fadeOut = function (dur,
   }
   return this;
 };
+_core__WEBPACK_IMPORTED_MODULE_0__["default"].prototype._in = function (elem, disp) {
+  const display = disp || 'block';
+  const fadeIn = complection => {
+    elem.style.display = display;
+    elem.style.opacity = complection;
+  };
+  return fadeIn;
+};
+_core__WEBPACK_IMPORTED_MODULE_0__["default"].prototype._out = function (elem) {
+  const fadeOut = complection => {
+    elem.style.opacity = 1 - complection;
+    if (complection === 1) {
+      elem.style.display = 'none';
+    }
+  };
+  return fadeOut;
+};
+_core__WEBPACK_IMPORTED_MODULE_0__["default"].prototype.fadeToggle = function (dur, display, fin) {
+  for (let i = 0; i < this.length; i++) {
+    if (window.getComputedStyle(this[i]).display === 'none') {
+      const disp = display || 'block';
+      const fadeIn = this._in(this[i], disp);
+      const ani = this.animateOverTime(dur, fadeIn);
+      requestAnimationFrame(ani);
+    } else {
+      const fadeOut = this._out(this[i]);
+      const ani = this.animateOverTime(dur, fadeOut, fin);
+      requestAnimationFrame(ani);
+    }
+  }
+  return this;
+};
 
 /***/ }),
 
@@ -425,13 +457,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _lib_lib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./lib/lib */ "./src/js/lib/lib.js");
 
 (0,_lib_lib__WEBPACK_IMPORTED_MODULE_0__["default"])('#first').on('click', () => {
-  (0,_lib_lib__WEBPACK_IMPORTED_MODULE_0__["default"])('div').eq(1).fadeOut(800);
+  (0,_lib_lib__WEBPACK_IMPORTED_MODULE_0__["default"])('div').eq(1).fadeToggle(800);
 });
 (0,_lib_lib__WEBPACK_IMPORTED_MODULE_0__["default"])('[data-count="second"]').on('click', () => {
-  (0,_lib_lib__WEBPACK_IMPORTED_MODULE_0__["default"])('div').eq(2).fadeOut(800);
+  (0,_lib_lib__WEBPACK_IMPORTED_MODULE_0__["default"])('div').eq(2).fadeToggle(800);
 });
 (0,_lib_lib__WEBPACK_IMPORTED_MODULE_0__["default"])('button').eq(2).on('click', () => {
-  (0,_lib_lib__WEBPACK_IMPORTED_MODULE_0__["default"])('.w-500').fadeOut(800);
+  (0,_lib_lib__WEBPACK_IMPORTED_MODULE_0__["default"])('.w-500').fadeToggle(800);
 });
 })();
 

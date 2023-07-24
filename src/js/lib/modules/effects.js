@@ -55,3 +55,44 @@ $.prototype.fadeOut = function(dur, fin) {
 
     return this;
 }
+
+$.prototype._in = function(elem, disp) {
+    const display = disp || 'block';
+    const fadeIn = (complection) => {
+        elem.style.display = display;
+        elem.style.opacity = complection;
+    };
+
+    return fadeIn;
+}
+
+$.prototype._out = function(elem) {
+    const fadeOut = (complection) => {
+        elem.style.opacity = 1 - complection;
+        if (complection === 1) {
+            elem.style.display = 'none';
+        }
+    };
+
+    return fadeOut;
+}
+
+$.prototype.fadeToggle = function(dur, display, fin) {
+    for(let i = 0; i < this.length; i++) {
+        if (window.getComputedStyle(this[i]).display === 'none') {
+            const disp = display || 'block';
+
+            const fadeIn = this._in(this[i], disp);
+            const ani = this.animateOverTime(dur, fadeIn);
+
+            requestAnimationFrame(ani);
+        } else {
+            const fadeOut = this._out(this[i]);
+            const ani = this.animateOverTime(dur, fadeOut, fin);
+
+            requestAnimationFrame(ani);
+        }
+    }
+
+    return this;
+}

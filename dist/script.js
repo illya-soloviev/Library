@@ -14,25 +14,21 @@ __webpack_require__.r(__webpack_exports__);
 _core__WEBPACK_IMPORTED_MODULE_0__["default"].prototype.accordion = function (headActive = 'accordion-head--active', contentActive = 'accordion-content--active', paddings = 40) {
   for (let i = 0; i < this.length; i++) {
     (0,_core__WEBPACK_IMPORTED_MODULE_0__["default"])(this[i]).click(() => {
-      const accordionHeads = [];
       for (let j = 0; j < this.length; j++) {
-        accordionHeads.push(this[j]);
-      }
-      accordionHeads.forEach(accordionHead => {
-        if (accordionHead !== this[i]) {
-          accordionHead.classList.remove(headActive);
-          accordionHead.nextElementSibling.classList.remove(contentActive);
-          accordionHead.nextElementSibling.style.maxHeight = '0px';
+        if (this[j] !== this[i]) {
+          this[j].classList.remove(headActive);
+          this[j].nextElementSibling.classList.remove(contentActive);
+          this[j].nextElementSibling.style.maxHeight = '0px';
         } else {
-          accordionHead.classList.toggle(headActive);
-          accordionHead.nextElementSibling.classList.toggle(contentActive);
-          if (accordionHead.classList.contains(headActive)) {
-            accordionHead.nextElementSibling.style.maxHeight = accordionHead.nextElementSibling.scrollHeight + paddings + 'px';
+          this[i].classList.toggle(headActive);
+          this[i].nextElementSibling.classList.toggle(contentActive);
+          if (this[i].classList.contains(headActive)) {
+            this[i].nextElementSibling.style.maxHeight = this[i].nextElementSibling.scrollHeight + paddings + 'px';
           } else {
-            accordionHead.nextElementSibling.style.maxHeight = '0px';
+            this[i].nextElementSibling.style.maxHeight = '0px';
           }
         }
-      });
+      }
     });
   }
 };
@@ -95,7 +91,6 @@ _core__WEBPACK_IMPORTED_MODULE_0__["default"].prototype.carousel = function () {
       }
       this._changeActiveDot(dots, slideIndex);
     });
-    console.log('124');
     const sliderId = this[i].getAttribute('id');
     (0,_core__WEBPACK_IMPORTED_MODULE_0__["default"])(`#${sliderId} .carousel-indicators li`).click(e => {
       const slideTo = e.target.getAttribute('data-slide-to');

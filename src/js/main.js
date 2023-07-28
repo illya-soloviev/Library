@@ -44,3 +44,15 @@ $('#trigger').click(() => $('#trigger').createModal({
         ]
     }
 }));
+
+$().get('https://jsonplaceholder.typicode.com/todos/1')
+    .then(res => console.log(res));
+
+const data = JSON.stringify({
+        title: 'dadad',
+        body: 'baradad',
+        userId: 101
+    });
+
+$().post('https://jsonplaceholder.typicode.com/posts', data, 'json')
+    .then(res => console.log(res));
